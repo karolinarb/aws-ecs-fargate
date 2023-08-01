@@ -1,1 +1,1 @@
-![diagram](./ecs-fargate-diagram.png)
+![diagram](./aws-ecs-fargate.png)
