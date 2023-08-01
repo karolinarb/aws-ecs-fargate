@@ -1,1 +1,1 @@
-# aws-ecs-fargate
+![diagram](./ecs-fargate-diagram.png)
