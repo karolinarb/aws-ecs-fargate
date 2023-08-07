@@ -1,0 +1,52 @@
+{
+   "containerDefinitions": [ 
+   {
+    "Name": "monolith-service",
+    "Image": "nginx:latest",
+    "PortMappings": [
+       {
+          "ContainerPort": 80,
+          "Protocol": "http"
+       }
+    ],
+    "Environment": [
+       {
+          "Name": "UPSTREAM_URL",
+          "Value": null
+       },
+       {
+          "Name": "DDB_TABLE_NAME",
+          "Value": null
+       }
+    ],
+    "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+          "awslogs-group": null,
+          "awslogs-region": null,
+          "awslogs-stream-prefix": "awslogs-mythicalmysfits-service"
+       }
+    },
+    "Essential": true
+ }
+]
+}
+
+ContainerDefinitions:
+- Name: monolith-service
+  Image: nginx:latest
+  PortMappings:
+    - ContainerPort: 80
+      Protocol: http
+  Environment:
+    - Name: UPSTREAM_URL
+      Value: !GetAtt MythicalLoadBalancer.DNSName
+    - Name: DDB_TABLE_NAME
+      Value: !Ref MythicalDynamoTable
+  LogConfiguration:
+    LogDriver: awslogs
+    Options:
+      awslogs-group: !Ref MythicalMonolithLogGroup
+      awslogs-region: !Ref AWS::Region
+      awslogs-stream-prefix: awslogs-mythicalmysfits-service
+  Essential: true
