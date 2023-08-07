@@ -7,6 +7,7 @@ In this project, I built the adoption platform with Docker and deployed it on Am
 1. Terraform apply
 2. Run scripts: populating ddb table, Uploading static site to S3
 3. deploy the container using fargate
+4.
 
 https://erik-ekberg.medium.com/terraform-ecs-fargate-example-1397d3ab7f02
 
