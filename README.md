@@ -3,7 +3,7 @@ In this project, I built the adoption platform with Docker and deployed it on Am
 
 ![diagram](./aws-ecs-fargate.png)
 
-
+Simplification: static simple website , no dynamodb
 1. Terraform apply
 2. Run scripts: populating ddb table, Uploading static site to S3
 3. deploy the container using fargate
