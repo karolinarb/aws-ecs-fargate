@@ -8,7 +8,8 @@ Terraform creates a ECR repository and runs a bash script to push the static-sit
 You can access the deployed static website using the DNS name associated with your load balancer that shows up as output after the deployment.
 
 ## Alternatives
-You don't need to store the docker image in ECR, you can pull it from DockerHub directly. Change the image value in task definition 
+1. You don't need to store the docker image in ECR, you can pull it from DockerHub directly. Change the image value for aws_ecs_task_definition to "dockersamples/static-site".
+2. You can use a VCP endpoint instead of NAT Gateway from Fargate to ECR. You will need 3 endpoints for: S3, ECR and Logs. 
 
 ## Sources:
 - https://erik-ekberg.medium.com/terraform-ecs-fargate-example-1397d3ab7f02
