@@ -1,6 +1,6 @@
 In this project, I built a static website with Docker image stored in ECR. Docker is run in an ECS cluster on Fargate.
 
-
+![diagram](diagram.png)
 
 ## About
 Terraform creates a ECR repository and runs a bash script to push the static-site Docker image. Then it creates an ECS cluster using the Fargate launch type. 
