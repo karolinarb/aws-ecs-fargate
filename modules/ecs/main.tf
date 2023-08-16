@@ -4,6 +4,7 @@ resource "aws_ecs_cluster" "dev_to" {
     name = "containerInsights"
     value = "enabled"
   }
+  depends_on = [var.ecr_repository]
 
   tags = {
     Project = var.project
@@ -33,11 +34,11 @@ resource "aws_ecs_task_definition" "dev_to" {
     "environment": [
       {
         "name": "AUTHOR",
-        "value": "Kieran"
+        "value": "Karolina"
       }
     ],
     "memory": 1024,
-    "image": "dockersamples/static-site",
+    "image":  "${var.repository_url}",
     "essential": true,
     "name": "site",
     "logConfiguration": {
@@ -60,7 +61,7 @@ TASK_DEFINITION
   cpu = "512"
   execution_role_arn = var.ecs_role.arn
   task_role_arn = var.ecs_role.arn
-
+  depends_on = [var.ecr_repository]
   tags = {
     Project = var.project
     Billing = var.project

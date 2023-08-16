@@ -63,7 +63,11 @@ data "aws_iam_policy_document" "ecs_service_standard" {
       "ecs:Submit*",
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
-      "logs:PutLogEvents"
+      "logs:PutLogEvents",
+      "ecr:GetAuthorizationToken",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
     ]
 
     resources = [
@@ -143,3 +147,4 @@ resource "aws_iam_role_policy_attachment" "ecs_service_scaling" {
   role = aws_iam_role.ecs_service.name
   policy_arn = aws_iam_policy.ecs_service_scaling.arn
 }
+

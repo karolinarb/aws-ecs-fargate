@@ -101,15 +101,16 @@ resource "aws_route_table" "internet_gateway_route_table" {
   }
 }
 
+
 resource "aws_eip" "nat_eip" {
   domain = "vpc"
-}
-
+} 
+ 
 #All your public subnets must route to an Internet Gateway
 # for non-local addresses. This is what makes the subnet public. 
 #The NAT Gateway needs to be deployed into one of these public 
 #subnets so it has access to the internet.
-
+ 
 resource "aws_nat_gateway" "nat_gateway" {
   allocation_id = aws_eip.nat_eip.id
   subnet_id     = aws_subnet.elb_a.id
@@ -133,8 +134,7 @@ resource "aws_route_table" "nat_gateway_route_table" {
   tags = {
     Project = var.project
   }
-}
-
+}  
 
 #ECS subnets have a route to the internet using the NAt gateway we created. 
 #The benefit of a NAT Gateway is they only allow outbound access. 
@@ -154,7 +154,7 @@ resource "aws_route_table_association" "elb_c" {
   subnet_id = aws_subnet.elb_c.id
   route_table_id = aws_route_table.internet_gateway_route_table.id
 }
-
+ 
 resource "aws_route_table_association" "ecs_a" {
   subnet_id = aws_subnet.ecs_a.id
   route_table_id = aws_route_table.nat_gateway_route_table.id
@@ -169,6 +169,7 @@ resource "aws_route_table_association" "ecs_c" {
   subnet_id = aws_subnet.ecs_c.id
   route_table_id = aws_route_table.nat_gateway_route_table.id
 }
+
 
 
 ### SECURITY GROUPS
@@ -205,7 +206,7 @@ resource "aws_security_group_rule" "ingress_ecs_task_elb" {
   to_port = 80
   source_security_group_id = aws_security_group.load_balancer.id
   type = "ingress"
-}
+} 
 
 resource "aws_security_group_rule" "egress_load_balancer" {
   type = "egress"
